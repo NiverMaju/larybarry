@@ -26,7 +26,7 @@
       </a>
       <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainNav">☰</button>
       <nav id="mainNav" class="main-nav" aria-label="Navegação principal">
-        <a href="#inicio">Início</a><a href="#dupla">A dupla</a><a href="#galeria">Galeria</a>
+        <a href="#inicio">Início</a><a href="#dupla">A dupla</a><a href="#diario">Diário</a><a href="#galeria">Galeria</a>
         <a href="#jogos">Jogos</a><a href="#comunidade">Comunidade</a><a href="#chat">Chat</a>
         <a class="gary-button" href="https://nivermaju.github.io/gary/" target="_blank" rel="noopener">🐌 Página do Gary</a>
       </nav>
@@ -85,6 +85,45 @@
       <div class="container story-grid">
         <div class="story-photo reveal"><img src="images/gary-observando.jpeg" alt="Gary observando Lary e Barry"><div class="photo-caption">Gary de olho nos novos moradores 👀</div></div>
         <div class="story-copy reveal"><span class="mini-title">A história começou assim</span><h2>A chegada ao aquário</h2><p>Lary e Barry chegaram juntos e logo começaram a explorar. Em pouco tempo já tinham descoberto as plantas, o aquecedor e os melhores esconderijos.</p><p>Gary, o morador mais famoso do aquário, acompanhou tudo bem de perto. Agora os três formam uma equipe cheia de personalidade.</p><a class="text-link" href="https://nivermaju.github.io/gary/" target="_blank" rel="noopener">Conhecer a história do Gary →</a></div>
+      </div>
+    </section>
+
+
+    <section class="section diary-section" id="diario">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="mini-title">Memórias do aquário</span>
+          <h2>Diário de Lary & Barry</h2>
+          <p>Os momentos especiais da dupla, guardados como um álbum de aventuras.</p>
+        </div>
+
+        <div class="diary-layout">
+          <div class="diary-timeline reveal" id="diaryTimeline"></div>
+
+          <aside class="diary-editor panel reveal">
+            <span class="diary-badge">✍️ Cantinho da Maju</span>
+            <h3>Adicionar uma lembrança</h3>
+            <p>As novas anotações ficam salvas neste aparelho.</p>
+            <form id="diaryForm">
+              <label for="diaryDate">Data</label>
+              <input id="diaryDate" type="date" required>
+              <label for="diaryTitle">Título</label>
+              <input id="diaryTitle" maxlength="50" required placeholder="Ex.: Passeio pela casinha">
+              <label for="diaryText">O que aconteceu?</label>
+              <textarea id="diaryText" maxlength="350" required placeholder="Conte a aventura de Lary e Barry..."></textarea>
+              <label for="diaryEmoji">Ícone da lembrança</label>
+              <select id="diaryEmoji">
+                <option value="🦐">🦐 Camarão</option>
+                <option value="🌿">🌿 Plantinha</option>
+                <option value="🏠">🏠 Casinha</option>
+                <option value="🐌">🐌 Gary</option>
+                <option value="🥬">🥬 Comidinha</option>
+                <option value="📸">📸 Fotografia</option>
+              </select>
+              <button class="btn btn-yellow diary-save" type="submit">Guardar no diário</button>
+            </form>
+          </aside>
+        </div>
       </div>
     </section>
 

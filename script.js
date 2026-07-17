@@ -69,3 +69,32 @@ if(firebaseReady){
     onSnapshot(query(collection(db,'larybarry_chat'),orderBy('createdAt','asc'),limit(100)),snap=>{state.messages=snap.docs.map(d=>d.data());renderMessages();});
   }catch(err){console.error(err);$('#communityStatus').textContent='Não foi possível conectar ao modo público; o modo local continua funcionando.';}
 }
+
+// Diário do aquário
+const defaultDiary = [
+  {date:'2026-07-16', title:'A chegada de Lary e Barry', text:'A dupla chegou juntinha e começou a conhecer o novo lar. Em poucos minutos, já estava explorando cada cantinho do aquário.', emoji:'🦐'},
+  {date:'2026-07-16', title:'Grudadinhos no aquecedor', text:'Lary e Barry ficaram lado a lado no aquecedor, como dois melhores amigos que não queriam se separar. Foi uma das primeiras fotos oficiais da dupla.', emoji:'📸'},
+  {date:'2026-07-16', title:'O encontro com Gary', text:'Gary observou os novos moradores bem de perto. Assim começou a amizade entre o caramujo mais famoso do aquário e os dois pequenos exploradores.', emoji:'🐌'},
+  {date:'2026-07-17', title:'Cada um escolheu seu cantinho', text:'Um deles gostou da casinha e o outro preferiu ficar entre as plantas. Mesmo explorando lugares diferentes, a dupla sempre volta a se encontrar.', emoji:'🌿'}
+];
+let diaryEntries = JSON.parse(localStorage.getItem('lb_diary') || 'null') || defaultDiary;
+function formatDiaryDate(value){
+  const [y,m,d]=value.split('-');
+  return new Date(Number(y),Number(m)-1,Number(d)).toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
+}
+function renderDiary(){
+  const timeline=$('#diaryTimeline');
+  if(!timeline)return;
+  const ordered=[...diaryEntries].sort((a,b)=>b.date.localeCompare(a.date));
+  timeline.innerHTML=ordered.length?ordered.map(item=>`<article class="diary-entry"><div class="diary-entry-head"><span class="diary-entry-icon">${esc(item.emoji)}</span><div><time datetime="${esc(item.date)}">${formatDiaryDate(item.date)}</time><h3>${esc(item.title)}</h3></div></div><p>${esc(item.text)}</p></article>`).join(''):'<div class="diary-empty">O diário está esperando a primeira aventura.</div>';
+}
+const diaryDate=$('#diaryDate');
+if(diaryDate) diaryDate.value=new Date().toISOString().slice(0,10);
+$('#diaryForm')?.addEventListener('submit',e=>{
+  e.preventDefault();
+  diaryEntries.push({date:diaryDate.value,title:$('#diaryTitle').value.trim(),text:$('#diaryText').value.trim(),emoji:$('#diaryEmoji').value});
+  localStorage.setItem('lb_diary',JSON.stringify(diaryEntries));
+  e.target.reset(); diaryDate.value=new Date().toISOString().slice(0,10); renderDiary();
+  $('#diaryTitle').focus();
+});
+renderDiary();
